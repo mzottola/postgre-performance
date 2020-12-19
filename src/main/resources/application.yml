@@ -3,15 +3,38 @@ server:
 
 spring:
   jpa:
-    show-sql: true
+#    show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
+      # performance seems better without batch
     properties:
-      hibernate:
-        jdbc:
-          batch_size: 100
+      hibernate.jdbc.batch_size: 100
   datasource:
     driver-class-name: org.postgresql.Driver
     username: user
     password: password
-    url: jdbc:postgresql://localhost:5432/pipelines?reWriteBatchedInserts=true
+    url: jdbc:postgresql://localhost:5432/pipelines
+#    url: jdbc:postgresql://localhost:5432/pipelines?stringtype=unspecified
+    # for postgre json column
+#    url: jdbc:postgresql://localhost:5432/pipelines?reWriteBatchedInserts=true
+
+# for batch logging purposes
+#
+#logging:
+#  level:
+#    jdbc:
+#      sqlonly: fatal
+#      resultsettable: info
+#      sqltiming: info
+#      audit: fatal
+#      resultset: fatal
+#      connection: fatal
+#
+#log4jdbc:
+#  dump:
+#    sql:
+#      addsemicolon: true
+#      maxlinelength: 0
+#  trim:
+#    sql:
+#      extrablanklines: false
