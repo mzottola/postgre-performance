@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  postgre-performance:
+    build: ./
+  postgresql:
+    image: postgres
+    container_name: pg-docker
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=perf-test
+    depends_on:
+      - postgre-performance
